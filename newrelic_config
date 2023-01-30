@@ -1,0 +1,33 @@
+provider "newrelic" {
+  api_key = var.newrelic_api_key
+}
+
+resource "newrelic_alert_policy" {
+  name        = "example-alert-policy"
+  incident_preference = "PER_POLICY"
+}
+
+resource "newrelic_alert_condition" {
+  name        = "example-alert-condition"
+  type        = "apm_app_metric"
+  policy_id   = newrelic_alert_policy.example-alert-policy.id
+  enabled     = true
+
+  metric      = "apm_metric_data.example.metric_name"
+  runbook_url = "https://runbook.example.com"
+
+  term {
+    duration      = 5
+    operator      = "below"
+    priority      = "critical"
+    threshold     = 0.5
+    time_function = "all"
+  }
+}
+
+variable "newrelic_api_key" {
+  type        = string
+}
+
+
+###Note: You'll need to replace the var.newrelic_api_key with your actual New Relic API key, and update the metric being monitored, the runbook URL, and the alert condition details to match your desired configuration.
