@@ -1,0 +1,41 @@
+provider "grafana" {
+  api_key = var.grafana_api_key
+  url     = var.grafana_url
+}
+
+resource "grafana_datasource" {
+  name      = "example-datasource"
+  type      = "prometheus"
+  url       = "http://prometheus.example.com"
+}
+
+resource "grafana_dashboard" {
+  name      = "example-dashboard"
+  config_json = jsonencode({
+    title = "Example Dashboard",
+    panels = [
+      {
+        type = "graph",
+        title = "Example Panel",
+        datasource = "example-datasource",
+        targets = [
+          {
+            expr = "sum(rate(request_total[1m])) by (app)",
+            legendFormat = "{{app}}"
+          }
+        ]
+      }
+    ]
+  })
+}
+
+variable "grafana_api_key" {
+  type        = string
+}
+
+variable "grafana_url" {
+  type        = string
+}
+
+
+###Note: You'll need to replace the var.grafana_api_key and var.grafana_url with your actual Grafana API key and URL, and update the Prometheus URL in the datasource to the desired Prometheus instance.
