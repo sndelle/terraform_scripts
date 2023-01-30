@@ -1,0 +1,41 @@
+provider "graylog" {
+  api_url = var.graylog_api_url
+  username = var.graylog_username
+  password = var.graylog_password
+}
+
+resource "graylog_input" {
+  name = "example-input"
+  type = "tcp"
+  port = 5000
+}
+
+resource "graylog_stream" {
+  name = "example-stream"
+  description = "Example Stream"
+  rule {
+    field = "message"
+    value = "example"
+    type = "contains"
+  }
+}
+
+resource "graylog_stream_output" {
+  stream_id = graylog_stream.example-stream.id
+  type = "elasticsearch"
+}
+
+variable "graylog_api_url" {
+  type = string
+}
+
+variable "graylog_username" {
+  type = string
+}
+
+variable "graylog_password" {
+  type = string
+}
+
+
+###Note: You'll need to replace the var.graylog_api_url, var.graylog_username, and var.graylog_password with your actual Graylog API URL, username, and password. Additionally, you'll need to update the input and stream details to match your desired configuration.
