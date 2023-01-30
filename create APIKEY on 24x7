@@ -1,0 +1,13 @@
+To create an API key in Site24x7, you can follow these steps:
+
+Log in to your Site24x7 account.
+Click on your username in the top right corner of the screen.
+Select "API Key" from the drop-down menu.
+Click on the "Create a New API Key" button.
+Enter a name for the API key, and select the permissions you want to grant to the API key.
+Click on the "Create" button.
+The new API key will be displayed in the "API Key" section of the page. You can use this key to make API requests to Site24x7.
+
+
+
+Note: The steps may vary slightly depending on the version of Site24x7 you are using. It's always best to consult the Site24x7 documentation for the most up-to-date information on creating API keys.
