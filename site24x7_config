@@ -1,0 +1,17 @@
+provider "site24x7" {
+  api_key = var.site24x7_api_key
+}
+
+resource "site24x7_monitor" {
+  name        = "example-monitor"
+  type        = "URL"
+  url         = "https://www.example.com"
+  check_freq  = 60
+}
+
+variable "site24x7_api_key" {
+  type        = string
+}
+
+
+##Note: You'll need to replace the var.site24x7_api_key with your actual Site24x7 API key, and update the URL being monitored to the desired URL you want to monitor.
